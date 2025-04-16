@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #qrcode {
+            margin-top: 20px;
+          }
+    </style>
+</head>
+<body>
+    <div>
+        <h3>GENERATE QR CODE</h3>
+        <input type="text" id="text" placeholder="Type your text or URL">
+        <br><br><label for="size">Select Size</label>&nbsp;&nbsp;
+        <select name="size" id="Size">
+            <option value="100">100x100</option>
+            <option value="200">200x200</option>
+            <option value="300">300x300</option>
+        </select>
+        <div id="qrcode"></div><br>
+        <button id="generate">Generate</button> &nbsp;&nbsp;&nbsp;&nbsp   <button id="download">Download</button>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==" crossorigin="anonymous" referrerpolicy="no-referrer">  </script>
+    <script>
+        const inputvalue=document.getElementById("text");
+        const generatebutton=document.getElementById("generate");
+        const downloadbutton=document.getElementById("download");
+        const size=document.getElementById("Size");
+        const qrcodeContainer=document.getElementById("qrcode");
+        let qrcode;
+
+        generatebutton.addEventListener("click", () => {
+    let textvalue = inputvalue.value.trim();
+    const selectsize = size.value;
+    qrcodeContainer.innerHTML = "";
+
+    if (textvalue === "") {
+        alert("Please enter the text or URL to generate the QR code");
+        return;
+    }
+
+    qrcode = new QRCode(qrcodeContainer, {
+        text: textvalue,
+        height: selectsize,
+        width: selectsize,
+        colorDark: "#000000",
+        colorLight: "#ffffff"
+    });
+});
+
+
+    </script>
+    
+</body>
+</html>

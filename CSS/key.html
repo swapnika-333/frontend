@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background-color: blue; 
+            position: relative;
+            animation-name: move-box;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+            
+
+        }
+
+        @keyframes move-box {
+            0%{ left:0;}
+            50%{ left:200px; transform: rotate(180deg);}
+            100%{ left:0;}
+            
+        }
+        .parent{
+            position: relative;
+            width: 300px;
+            height: 200px;
+            background-color: green;
+            top: 200px;
+        }
+        .child{
+            position:absolute;
+            top: 10px;
+            right: 10px;
+            background-color: lightgreen;
+            padding: 20px;
+        }
+
+        body{
+            height: 200vh;
+            background-color: lightgrey;
+        }
+        .swapnika{
+            position: fixed;
+            background-color: lightgoldenrodyellow;
+            top: 100px;
+        }
+        .swapnika1{
+            position: sticky;
+            top: 50px;
+            background-color: brown;
+        }
+        
+        
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <div style="display: table; width: 100%; background-color: lightblue;">
+        <div style="display: table-row;">
+            <div style="display: table-cell; padding: 10px; background-color: coral;">cell 1</div>
+            <div style="display: table-cell; padding: 10px; background-color: lightgreen;">cell 2</div>
+            <div style="display: table-cell; padding: 10px; background-color: lightcoral;">cell 3</div>
+        </div>
+        <div style="display: table-row;">
+            <div style="display: table-cell; padding: 10px; background-color: lightgray;">cell 4</div>
+            <div style="display: table-cell; padding: 10px; background-color: lightblue;">cell 5</div>
+            <div style="display: table-cell; padding: 10px; background-color: lightpink;">cell 6</div>
+        </div>
+    </div>
+    <div class="parent">
+        <div class="child"></div>
+    </div>
+    <div class="swapnika">SWAPNIKA</div>
+    <div class="swapnika1">SWAPNIKA1</div>
+
+
+        
+</body>
+</html>

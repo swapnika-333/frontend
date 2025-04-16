@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 300px;
+            height: 200px;
+            background: linear-gradient(45deg,red,yellow,blue);
+        }
+
+        .shadow{
+            width: 300px;
+            height: 200px;
+            background: radial-gradient(ellipse,white,red,blue);
+        }
+
+        .conic{
+            width: 300px;
+            height: 200px;
+            background: conic-gradient(blue,red,yellow,green);
+        }
+        
+        .trans{
+            width: 300px;
+            height: 200px;
+            background-color: lightblue;
+            border: solid;
+            border-radius: 1px,black;
+            transition: (background-color 5s ease,border 5s ease);
+
+        }
+        .trans:hover{
+            background-color: red;
+            border-radius: 50px;
+
+        }
+
+        .translate{
+            width:300px;
+            height:200px;
+            background-color: lightblue;
+            border: solid;
+            border-radius: 1px;
+            transition:(transform 0.5s ease, border-radius 1s);
+        }
+        .translate:hover{
+            border-radius: 200px;
+            transform: scale(0.5) rotate(45deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <div class="shadow"></div>
+    <div class="conic"></div>
+    <div class="trans"></div>
+    <div calss="translate"></div>
+
+</body>
+</html>

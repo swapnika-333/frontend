@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>document</title>
+    <link rel="stylesheet" href="style1.css">
+<style>
+    .swapnika{
+        background-color: blue;
+        text-decoration: none;
+    }
+
+    .swapnika:hover{
+        background-color: green;
+    }
+    .swapnika:focus{
+        background-color: red;
+    }
+    .swapnika:active{
+        background-color: black;
+    }
+
+    li:nth-child(2n){
+        background-color: yellow;
+    }
+    li:nth-child(3n){
+        color: blue;
+    }
+    h1::first-letter{
+        color: red;
+    }
+    h1::before{
+        content: "⭐";
+        color: gold;
+    }
+    h1::after{
+        content:"⭐";
+        color: gold;
+    }
+    p:first-line{
+        color:blueviolet;
+    }
+
+    ::selection{
+        background-color: purple;
+    }
+    .simple-shadow{
+        box-shadow: 5px 5px 10px rgba(0,0,0,0.5), rgba(0,0,0,0.5)
+    }
+    .box-simpleshadow{
+        width: 100px;
+        height: 100px;
+        padding: 20px;
+        margin: 30px;
+        border: 1px solid grey;
+        box-shadow: 10px 10px 10px red;;
+
+    }
+
+    
+</style>
+<head>
+    <body>
+        <a href="" class="swapnika">click</a>
+        <h1>swapnika</h1>
+        <p>codegnan institute <br>java full stack</p>
+        
+    </body>
+</head>
+
+<ul>
+    <li>item 1</li>
+    <li>item 2</li>
+    <li>item 3</li>
+    <li>item 4</li>
+    <li>item 5</li>
+    <li>item 6</li>
+</ul>
+<div class="box-simpleshadow">Simple shadow</div>

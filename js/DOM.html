@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation Examples</title>
+</head>
+<body>
+    
+
+    <h1 id="welcome to my page">welcome to my page</h2>
+    <h2 class="red">red</h2>
+    <h3 class="green">green</h2>
+
+    <p>How are you</p>
+    <p>fine! how about you</p>
+    <p>very good</p>
+
+</body>
+</html>
+<script>
+    let Element1 = document.getElementById("title");
+    Element1.style.backgroundcolor = "red";
+
+    let Element2 = document.getElementsByClassName("red");
+    Element2[0].style.backgroundcolor="red";
+
+    let Element = document.getElementsByClassName("green");
+    Element[0].style.backgroundcolor="green";
+</script>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple To-Do List</title>
+</head>
+<body>
+
+    <h1>My To-Do List</h1>
+    <div>
+        <form id="todo-form">
+            <input id="todo-input"/>
+            <button type="submit" id="add-button">
+                Add Task
+            </button>
+        </form>
+
+        <ul id="todo-list">
+        </ul>
+    </div>
+
+    <script>
+        
+        const form = document.getElementById('todo-form');
+        const input = document.getElementById('todo-input');
+        const list = document.getElementById('todo-list');
+
+
+        
+        let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+        
+        function saveAndRender() {
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+            renderList();
+        }
+
+        
+        function renderList() {
+            list.innerHTML = '';
+
+            tasks.forEach((task, index) => {
+                const listItem = document.createElement('li');
+                
+                let taskText = task.text;
+                if (task.completed) {
+                    taskText = `<span style="text-decoration: line-through; color: gray;">${taskText}</span>`;
+                }
+                listItem.innerHTML = taskText;
+
+                const doneButton = document.createElement('button');
+                doneButton.textContent = 'Done';
+                doneButton.style.backgroundColor = '#22c55e';
+                doneButton.addEventListener('click', () => {
+                    tasks[index].completed = !tasks[index].completed;
+                    saveAndRender();
+                });
+
+                const editButton = document.createElement('button');
+                editButton.textContent = 'Edit';
+                editButton.style.backgroundColor = '#3b82f6';
+                editButton.addEventListener('click', () => {
+                    const newText = prompt('Edit task:', task.text);
+                    if (newText !== null && newText !== '') {
+                        tasks[index].text = newText;
+                        saveAndRender();
+                    }
+                });
+
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.style.backgroundColor = '#ef4444';
+                deleteButton.addEventListener('click', () => {
+                    tasks.splice(index, 1);
+                    saveAndRender();
+                });
+
+                listItem.appendChild(doneButton);
+                listItem.appendChild(editButton);
+                listItem.appendChild(deleteButton);
+
+
+                list.appendChild(listItem);
+            });
+        }
+
+        
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const newTask = input.value.trim();
+
+            if (newTask !== '') {
+                tasks.push({ text: newTask, completed: false });
+                input.value = '';
+                saveAndRender();
+            }
+        });
+
+        
+
+        renderList();
+
+
+        
+    </script>
+</body>
+</html>

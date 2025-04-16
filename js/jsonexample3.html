@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+          }
+      
+          body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: lightpink;
+            color: #333;
+            text-align: center;
+            padding: 30px;
+          }
+      
+          h1 {
+            margin-bottom: 20px;
+          }
+      
+          #City {
+            padding: 10px;
+            font-size: 16px;
+            width: 220px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            margin-right: 10px;
+          }
+      
+          #button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: blanchedalmond;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+          }
+      
+          #button:hover {
+            background-color:green;
+          }
+      
+          #root {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+          }
+      
+          #root h3 {
+            background: #ffffff;
+            padding: 12px 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            text-align: left;
+          }
+      
+          img {
+            margin-top: 10px;
+            height: 64px;
+          }
+    </style>
+</head>
+<body>
+    <h1>Wheather API</h1>
+    <ul id="root"></ul>
+    <button id="button" onclick="fetchWeather()">FetchWeather</button>
+    <label for="text">City:</label>
+    <input type="text" id="City" placeholder="enter city">
+
+    <script>
+        let ulElement=document.getElementById("root");
+        function fetchWeather(){
+
+            const API_KEY='8c88198c5c444e7fa11114817250904';  
+            const Base_URL=`http://api.weatherapi.com/v1/current.json`;
+            let city=document.getElementById("City").value;
+            const url=`${Base_URL}?key=${API_KEY}&q=${city}&aqi=no`;
+            //fetch("http://api.weatherapi.com/v1/current.json?key=8c88198c5c444e7fa11114817250904&q=London&aqi=no")
+            fetch(url)
+            .then((response)=>{
+                return response.json();
+            })
+            .then((data)=>{
+                console.log(data);      
+                fetchData(data);
+            })
+            .catch((error)=>{
+                console.log("Error");
+            })
+        }
+
+        function fetchData(data){
+
+            ulElement.innerHTML = ""; 
+
+            let Name=document.createElement("h3");
+            Name.textContent=`Name : ${data.location.name}`;
+            ulElement.appendChild(Name);
+
+            let lielement=document.createElement("h3")
+            lielement.textContent=`Region : ${data.location.region}`;
+            ulElement.appendChild(lielement);
+
+            let Country=document.createElement("h3");
+            Country.textContent=`Country : ${data.location.country}`;
+            ulElement.appendChild(Country);
+
+            let lat=document.createElement("h3");
+            lat.textContent=`Lat : ${data.location.lat}`;
+            ulElement.appendChild(lat);
+
+            let lon=document.createElement("h3");
+            lon.textContent=`Lon : ${data.location.lon}`;
+            ulElement.appendChild(lon);
+
+            let TZ_ID=document.createElement("h3");
+            TZ_ID.textContent=`TZ_ID : ${data.location.tz_id}`;
+            ulElement.appendChild(TZ_ID);
+
+            let localtime_epoch=document.createElement("h3");
+            localtime_epoch.textContent=`Localtime_Epoch : ${data.location.localtime_epoch}`;
+            ulElement.appendChild(localtime_epoch);
+
+            let localtime=document.createElement("h3");
+            localtime.textContent=`Local Time : ${data.location.localtime}`;
+            ulElement.appendChild(localtime);
+
+            let last_updated_epoch=document.createElement("h3");
+            last_updated_epoch.textContent=`Last_Updated_Epoch : ${data.current.last_updated_epoch}`;
+            ulElement.appendChild(last_updated_epoch);
+
+            let last_updated=document.createElement("h3");
+            last_updated.textContent=`Last_Updated : ${data.current.last_updated}`;
+            ulElement.appendChild(last_updated);
+
+            let temperature=document.createElement("h3")
+            temperature.textContent=`Temperature : ${data.current.temp_c}`;
+            ulElement.appendChild(temperature);
+
+            let temperature2=document.createElement("h3");
+            temperature2.textContent=`Temperature2 : ${data.current.temp_f}`;
+            ulElement.appendChild(temperature2);
+
+            let is_day=document.createElement("h3");
+            is_day.textContent=`Is_Day : ${data.current.is_day}`;
+            ulElement.appendChild(is_day);
+                               
+            let text=document.createElement("h3");
+            text.textContent=`Text : ${data.current.condition.text}`;
+            ulElement.appendChild(text);
+
+            let icon=document.createElement("img");
+            icon.src=data.current.condition.icon;
+            ulElement.appendChild(icon);
+
+            let code=document.createElement("h3");
+            code.textContent=`Code : ${data.current.condition.code}`;
+            ulElement.appendChild(icon);
+
+            let wind_mph=document.createElement("h3");
+            wind_mph.textContent=`Wind_mph : ${data.current.wind_mph}`;
+            ulElement.appendChild(wind_mph);
+
+            let wind_kph = document.createElement("h3");
+            wind_kph.textContent = `Wind_kph : ${data.current.wind_kph}`;
+            ulElement.appendChild(wind_kph);
+
+            let wind_degree = document.createElement("h3");
+            wind_degree.textContent = `Wind_degree : ${data.current.wind_degree}`;
+            ulElement.appendChild(wind_degree);
+
+            let wind_dir = document.createElement("h3");
+            wind_dir.textContent = `Wind_dir : ${data.current.wind_dir}`;
+            ulElement.appendChild(wind_dir);
+
+            let pressure_mb = document.createElement("h3");
+            pressure_mb.textContent = `Pressure_mb : ${data.current.pressure_mb}`;
+            ulElement.appendChild(pressure_mb);
+
+            let pressure_in = document.createElement("h3");
+            pressure_in.textContent = `Pressure_in : ${data.current.pressure_in}`;
+            ulElement.appendChild(pressure_in);
+
+            let precip_mm = document.createElement("h3");
+            precip_mm.textContent = `Precip_mm : ${data.current.precip_mm}`;
+            ulElement.appendChild(precip_mm);
+
+            let precip_in = document.createElement("h3");
+            precip_in.textContent = `Precip_in : ${data.current.precip_in}`;
+            ulElement.appendChild(precip_in);
+
+            let humidity = document.createElement("h3");
+            humidity.textContent = `Humidity : ${data.current.humidity}`;
+            ulElement.appendChild(humidity);
+
+            let cloud = document.createElement("h3");
+            cloud.textContent = `Cloud : ${data.current.cloud}`;
+            ulElement.appendChild(cloud);
+
+            let feelslike_c = document.createElement("h3");
+            feelslike_c.textContent = `Feelslike_c : ${data.current.feelslike_c}`;
+            ulElement.appendChild(feelslike_c);
+
+            let feelslike_f = document.createElement("h3");
+            feelslike_f.textContent = `Feelslike_f : ${data.current.feelslike_f}`;
+            ulElement.appendChild(feelslike_f);
+
+            let windchill_c = document.createElement("h3");
+            windchill_c.textContent = `Windchill_c : ${data.current.windchill_c}`;
+            ulElement.appendChild(windchill_c);
+
+            let windchill_f = document.createElement("h3");
+            windchill_f.textContent = `Windchill_f : ${data.current.windchill_f}`;
+            ulElement.appendChild(windchill_f);
+
+            let heatindex_c = document.createElement("h3");
+            heatindex_c.textContent = `Heatindex_c : ${data.current.heatindex_c}`;
+            ulElement.appendChild(heatindex_c);
+
+            let heatindex_f = document.createElement("h3");
+            heatindex_f.textContent = `Heatindex_f : ${data.current.heatindex_f}`;
+            ulElement.appendChild(heatindex_f);
+
+            let dewpoint_c = document.createElement("h3");
+            dewpoint_c.textContent = `Dewpoint_c : ${data.current.dewpoint_c}`;
+            ulElement.appendChild(dewpoint_c);
+
+            let dewpoint_f = document.createElement("h3");
+            dewpoint_f.textContent = `Dewpoint_f : ${data.current.dewpoint_f}`;
+            ulElement.appendChild(dewpoint_f);
+
+            let vis_km = document.createElement("h3");
+            vis_km.textContent = `Vis_km : ${data.current.vis_km}`;
+            ulElement.appendChild(vis_km);
+
+            let vis_miles = document.createElement("h3");
+            vis_miles.textContent = `Vis_miles : ${data.current.vis_miles}`;
+            ulElement.appendChild(vis_miles);
+
+            let uv = document.createElement("h3");
+            uv.textContent = `UV : ${data.current.uv}`;
+            ulElement.appendChild(uv);
+
+            let gust_mph = document.createElement("h3");
+            gust_mph.textContent = `Gust_mph : ${data.current.gust_mph}`;
+            ulElement.appendChild(gust_mph);
+
+            let gust_kph = document.createElement("h3");
+            gust_kph.textContent = `Gust_kph : ${data.current.gust_kph}`;
+            ulElement.appendChild(gust_kph);
+
+        }
+    </script>
+</body>
+</html>

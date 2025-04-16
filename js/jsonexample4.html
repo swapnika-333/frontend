@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img{
+            height: 100px;
+            width: 100px;
+            border-radius: 50px;
+        }
+    </style>
+</head>
+<body>
+    <ul id="root"></ul>
+    <button id="button" onclick="myasyncFunction()">Fetch</button>
+    <label for="name"></label>
+    <input type="text" id="username" placeholder="Enter url">
+
+    <script>   
+
+        async function myasyncFunction(){
+            try{
+                let ulElement=document.getElementById("root");
+                const username=document.getElementById("username").value
+                const url=`https://api.github.com/users/${username}`;
+                let res=await fetch(url)
+                let response= await res.json()
+                console.log(response);
+
+                ulElement.innerHTML=""
+
+                let avatar_url=document.createElement("img");
+                avatar_url.src=response.avatar_url;
+                ulElement.appendChild(avatar_url);
+
+                let blog=document.createElement("h4");
+                blog.textContent=`Blog : ${response.blog}`;
+                ulElement.appendChild(blog)
+
+                let bio=document.createElement("h4");
+                bio.textContent=`Bio : ${response.bio}`;
+                ulElement.appendChild(bio);
+
+                let company=document.createElement("h4");
+                company.textContent=`Company : ${response.company}`;
+                ulElement.appendChild(company);
+
+                let created_at=document.createElement("h4");
+                created_at.textContent=`Created_At : ${response.created_at}`
+                ulElement.appendChild(created_at);
+
+                let public_repos=document.createElement("h4");
+                public_repos.textContent=`Public_Repos : ${response.public_repos}`;
+                ulElement.appendChild(public_repos);
+
+                let twitter_username=document.createElement("h4");
+                twitter_username.textContent=`Twitter_Username : ${response.twitter_username}`;
+                ulElement.appendChild(twitter_username);
+
+                let Url = document.createElement("a");
+                Url.href = response.url; 
+                Url.textContent = "Visit Link"; 
+                Url.target = "_blank";
+               
+            }catch(error){
+                console.log("error");
+            }
+        }
+    </script>
+</body>
+</html>

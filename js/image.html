@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img{
+            height: 200px;
+            width: 200px;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: lightgreen;
+            margin: 20px;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 20px;
+            background-color:lightseagreen;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .product-card {
+            background: white;
+            width: 220px;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+        .product-card:hover{
+            background-color:rgb(241, 128, 241);
+        }
+        .product-card:focus{
+            background-color:goldenrod;
+        }
+        .product-card:active{
+            background-color:rgb(139, 247, 139);
+        }
+        p{
+            font-size: 14px;
+            color: #666;
+            margin: 5px 0;
+            text-align: justify;
+        }
+
+    </style>
+</head>
+<body>
+    <ul id="root"></ul>
+    <button id="button" onclick="displayData()">Products</button>
+    <script>
+        let ulElement=document.getElementById("root");
+        var Productsdata=[];
+        function displayData(){
+            fetch("https://dummyjson.com/products")
+            .then((response)=>{
+                return response.json();
+            })
+            .then((data)=>{
+                Productsdata = data.products;
+                console.log(Productsdata);
+                fetchData3();
+            })
+            .catch((error)=>{
+                console.log("No data found");
+            })
+        }
+        
+        function fetchData3(){
+            Productsdata.forEach((Element)=>{
+                let card=document.createElement("div");
+                card.className="product-card";
+
+                let lielement=document.createElement("h3");
+                lielement.textContent=Element.title;
+                card.appendChild(lielement);
+
+                let description=document.createElement("p");
+                description.textContent=Element.description;
+                card.appendChild(description);
+
+
+                let imageTag=document.createElement("img");
+                imageTag.src=Element.images;
+                card.appendChild(imageTag);
+
+                ulElement.appendChild(card);
+
+                
+            })
+        }
+
+    </script>
+</body>
+</html>
